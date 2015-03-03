@@ -33,6 +33,7 @@ function prompt_sorin_precmd {
   if (( $+functions[git-info] )); then
     git-info
   fi
+  ruby-info
 }
 
 function prompt_sorin_setup {
@@ -45,7 +46,7 @@ function prompt_sorin_setup {
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_sorin_precmd
-
+  zstyle ':prezto:module:ruby:info:version' format ' %B%F{red}ruby-%v'
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
@@ -61,7 +62,7 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%f'
   zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
   zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
-  zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
+  zstyle ':prezto:module:git:info:modified' format ' %%B%F{yellow}●%f%%b'
   zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
   zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
   zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
@@ -72,7 +73,7 @@ function prompt_sorin_setup {
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  PROMPT='${SSH_TTY:+"%F{red}%n%f@%F{yellow}%m%f "}%F{cyan}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${SSH_TTY:+"%F{red}%n%f@%F{yellow}%m%f "}%F{cyan}${_prompt_sorin_pwd}%f$ruby_info[version]${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${INSIDE_EMACS:+" %B%F{green}E%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }

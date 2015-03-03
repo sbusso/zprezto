@@ -11,3 +11,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+export DOCKER_HOST=tcp://localhost:2375
+export PATH="bin:/Users/sbusso/.rbenv/shims:/Users/sbusso/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+
+eval "$(rbenv init -)"
+source ~/.docker-env
+
+export SHELL=/bin/zsh
+unalias rm
+
+source ~/.docker-stage
+
